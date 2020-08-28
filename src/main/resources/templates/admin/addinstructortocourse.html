@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" xmlns:th="https://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8" xmlns:th="https://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9" xmlns:th="https://www.thymeleaf.org"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" xmlns:th="https://www.thymeleaf.org">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+            crossorigin="anonymous">
+    <link
+            href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css"
+            rel="stylesheet" crossorigin="anonymous">
+
+    <link rel="stylesheet" th:href="@{/css/theme.css}">
+</head>
+<body>
+<div class="topnav" style="float: top">
+    <a class="active" href="/admin">GroupMe</a> <a style="float: right"
+                                                   href="/logout">Logout</a>
+</div>
+
+<div class="container">
+    <form class="custom-form-control" method="post" action="/admin/createClass">
+        <h2 class="form-signin-heading text-center" style="color: #2DA9B7">Create Class</h2>
+        <p>
+            <input
+                    type="text" id="courseCode" name="courseCode" class="form-control"
+                    placeholder="Course Code" required="true" autofocus="">
+        </p>
+        <p>
+            <input
+                    type="text" id="email" name="email" class="form-control"
+                    placeholder="Instructor Email" required="true">
+        </p>
+
+        <button class="btn btn-lg btn-primary btn-block btn-submit"
+                type="submit">Create Class
+        </button>
+    </form>
+
+    <p th:text="${message}"></p>
+
+</div>
+
+
+<script src="" async defer></script>
+</body>
+</html>

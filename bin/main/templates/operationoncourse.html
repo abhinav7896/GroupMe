@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Admin Page</title>
+
+    <script type="text/javascript">
+
+        function showCsvImportDiv() {
+            document.getElementById('div_get_data').style.display = 'none';
+            if (document.getElementById('import_csv_form').style.display == 'none') {
+                document.getElementById('import_csv_form').style.display = 'block';
+            }
+        }
+
+        function showAddTADiv() {
+            document.getElementById('import_csv_form').style.display = 'none';
+            if (document.getElementById('div_get_data').style.display == 'none') {
+                document.getElementById('div_get_data').style.display = 'block';
+            }
+
+        }
+    </script>
+
+    <style>
+        .form {
+            text-align: center;
+            border: black;
+            border-radius: 3px;
+            padding: 50px;
+            margin: 0 auto;
+            margin-top: 100px;
+        }
+
+        .text-box {
+            width: 300px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+<div id="buttons" style="text-align: center; display: block; ">
+    <table>
+        <tr>
+            <td>
+                <button name="importcsv" onclick="showCsvImportDiv()">Import CSV</button>
+            </td>
+            <td>
+                <button name="addta" onclick="showAddTADiv()">Add TA</button>
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="import_csv_form" style="display: none; margin: auto 0; text-align: center">
+    <form th:action="@{/courseAdmin/uploadfile}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="courseCode" th:value="${courseCode}">
+        <input type="hidden" name="courseName" th:value="${courseName}">
+        <input type="file" id="file" name="file"/>
+        <br>
+        <input type="submit"/>
+    </form>
+</div>
+
+<div id="div_get_data" style="text-align: center; display: none;">
+    <h3>Select TA from Existing User for Course</h3>
+    <form name="form_get_data" class="form" th:action="@{/courseoperation(courseCode=${courseCode})}" method="POST"
+          style="text-align: center;">
+        <table>
+            <tr>
+                <th colspan="2" style="text-align: center">
+                    Assign TA to the Course
+                </th>
+            </tr>
+            <tr>
+                <td><label for="email">Email</label></td>
+                <td>
+                    <input type="email" th:name="email" id="email" placeholder="Enter Email" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit">Submit</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<span th:if="${status != null}">
+    <p th:text="'Status: ' + ${status}"></p>
+</span>
+
+</body>
+</html>

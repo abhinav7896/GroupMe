@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Survey</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/theme.css}"/>
+
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 10px;
+        }
+
+        tr {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="topnav">
+    <a href="#">GroupMe</a>
+    <a style="float: right" href="/logout">Logout</a>
+    <a style="float: right" class="active" href="#account">Account</a>
+</div>
+<div>
+    <form th:if="${surveyPublish} == 1 or ${arraySize} == 0" name="form3" id="goBackForm" method="post"
+          th:action="@{/customiseSurvey/redirectToCourseAdmin}">
+        <h4 th:text="${publisherMessage}"></h4>
+        <input type="hidden" name="roleName" th:value="${roleName}">
+        <button type="submit" id="goBackButton" style="float: right; margin-right: 20px; ">Go Back</button>
+    </form>
+</div>
+<div>
+    <form name="surveyQuestionForm" method="post" th:action="@{/customiseSurvey/saveCustomisedSurvey}"
+          th:object="${surveyQuestions}">
+        <table th:if="${surveyPublish} != 1 and ${arraySize} != 0" style="width:100%;" id="surveyQuestionTableData">
+            <thead>
+            <tr>
+                <td>Question ID</td>
+                <td>Question Title</td>
+                <td>Question</td>
+                <td>Question Type</td>
+                <td>Select Grouping Criteria</td>
+                <td>Question Weightage</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="question, state : *{surveyQuestionList}">
+                <td>
+                    <input type="text" id="questionId"
+                           th:field="*{surveyQuestionList[__${state.index}__].questionId}"
+                           class="inputbox" readonly/>
+                </td>
+                <td>
+                    <input type="text" id="questionTitle" style="overflow: scroll;"
+                           th:field="*{surveyQuestionList[__${state.index}__].questionTitle}"
+                           class="inputbox" readonly/>
+                </td>
+                <td>
+                    <input type="text" id="question" style="overflow: scroll;"
+                           th:field="*{surveyQuestionList[__${state.index}__].question}"
+                           class="inputbox" readonly/>
+                </td>
+                <td>
+                    <input type="text" id="questionType" style="overflow: scroll;"
+                           th:field="*{surveyQuestionList[__${state.index}__].questionType}"
+                           class="inputbox" readonly/>
+                </td>
+                <td>
+                    <select name="criterion" id="criterion"
+                            th:field="*{surveyQuestionList[__${state.index}__].criterion}" required>
+                        <option value="1" selected> Group Similar</option>
+                        <option value="2"> Group Dissimilar</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="weight"
+                           th:field="*{surveyQuestionList[__${state.index}__].weight}"
+                           class="inputbox" required/>
+                </td>
+                <input type="hidden" id="upperBound"
+                       th:field="*{surveyQuestionList[__${state.index}__].upperBound}"
+                       th:default="none"
+                       class="inputbox"/>
+                <input type="hidden" id="lowerBound"
+                       th:field="*{surveyQuestionList[__${state.index}__].lowerBound}"
+                       th:default="none"
+                       class="inputbox"/>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <input type="hidden" name="roleName" th:value="${roleName}">
+                    <input type="hidden" name="courseCode" th:value="${courseCode}">
+                    <button type="submit" name="submit" style="float: right" class="button">Save</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</body>
+</html>

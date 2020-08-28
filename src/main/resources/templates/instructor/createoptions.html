@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Question</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/theme.css}"/>
+
+    <style type="text/css">
+        .label {
+            margin-top: 10px;
+            margin-left: 50px;
+        }
+
+        .inputbox {
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+
+        .button {
+            margin-top: 20px;
+            float: right;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+<div class="topnav">
+    <a href="/instructorhomepage">GroupMe</a>
+    <a style="float: right" href="/logout">Logout</a>
+    <a style="float: right" class="active" href="#account">Account</a>
+</div>
+
+<div>
+    <ul class="vNavbar">
+        <li><a th:href="@{/instructor/createQuestion}">Create Question</a></li>
+        <li><a th:href="@{/instructor/listAllTitles}">View List of Titles</a></li>
+        <li><a th:href="@{/instructor/deleteQuestion}">Delete Question</a></li>
+    </ul>
+    <br/>
+    <span th:text="${message}"></span>
+</div>
+
+<div style="text-align: center;">
+    <h3> Add Options for Question Here</h3>
+    <br><br>
+    <form name="form" method="POST" style="display: inline-block;" th:object="${options}"
+          th:action="@{/instructor/createOptions/newOption}">
+        <table id="optionTable">
+            <tbody>
+            <tr th:each="option, state : *{optionList}">
+                <td><label for="display_text" class="label">Display Text:</label></td>
+                <td><input type="text" name="display_text" id="display_text"
+                           th:field="*{optionList[__${state.index}__].optionText}" class="inputbox"/></td>
+                <td><label for="stored_as" class="label">Stored as:</label></td>
+                <td><input type="text" name="stored_as" id="stored_as"
+                           th:field="*{optionList[__${state.index}__].optionId}" class="inputbox"/></td>
+                <td><input type="hidden" name="display_order"
+                           th:field="*{optionList[__${state.index}__].displayOrder}" class="inputbox"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <button type="submit" id="more_answers"
+                            class="button">More Answers
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <button type="submit" id="submit" class="button"
+                            th:formaction="@{/instructor/saveMultipleChoiceQuestion}">Save
+                    </button>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+        <input type="hidden" name="question" th:value="${questionDetails.question}">
+        <input type="hidden" name="title" th:value="${questionDetails.title}">
+        <input type="hidden" name="type" th:value="${questionDetails.type}">
+    </form>
+
+
+</div>
+</body>
+</html>

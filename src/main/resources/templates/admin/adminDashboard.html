@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/admin.css}"/>
+    <meta charset="ISO-8859-1">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+<ul class="hNavbar">
+    <li class="hNavbar"><a href="/admin"> GroupMe</a></li>
+    <li style="float: right"><a href="#logOut">Logout</a></li>
+    <li style="float: right"><a class="active" href="#AdminAccount">Account</a></li>
+</ul>
+<br/>
+
+<ul class="vNavbar">
+    <li><a class="active" href="#admin">Dashboard</a></li>
+    <li><a href="/admin/manageCourses">Manage Courses</a></li>
+    <li><a href="/admin/manageInstructors">Manage Instructors</a></li>
+</ul>
+<br/>
+<div style="margin-left: 21%; padding: 1px">
+    <h2 style="text-align: center">ADMIN DASHBOARD</h2>
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Home Page</title>
+    <link
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+            crossorigin="anonymous">
+    <link
+            href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css"
+            rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/theme.css}"/>
+    <script th:inline="javascript">
+        var isInstructor = "[[${isInstructor}]]";
+
+        function showCourseAdminButton() {
+            if (isInstructor === "true") {
+                document.getElementById('courseAdminButton').style.display = "block";
+                document.getElementById('questionManagerButton').style.display = "block";
+            }
+        }
+    </script>
+</head>
+<body onload="showCourseAdminButton()">
+
+
+<div class="topnav">
+    <a href="/instructorhomepage">GroupMe</a> <a style="float: right" href="/logout">Logout</a>
+    <a style="float: right" class="active" href="#account">Account</a>
+</div>
+
+<div style="text-align: center; margin: 0 auto; padding-top: 10px">
+
+    <div id="courseAdminButton" style="text-align: center; display: none;">
+        <form th:action="@{/instructor/courseAdminPage}" method="get">
+            <input name="roleName" type="hidden" th:value="${roleName}">
+            <button
+                    style="background-color: gray; box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
+                    type="submit">Course Admin Page
+            </button>
+        </form>
+    </div>
+
+    <div id="questionManagerButton" style="text-align: center; display: none;">
+        <form th:action="@{/instructor/questionManagerPage}" method="get">
+            <button
+                    style="background-color: gray; box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
+                    type="submit">Questions Manager
+            </button>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

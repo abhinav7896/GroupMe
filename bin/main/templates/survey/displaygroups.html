@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Student Home Page</title>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+	crossorigin="anonymous">
+<link
+	href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css"
+	rel="stylesheet" crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/theme.css}" />
+<script th:inline="javascript">
+	var isInstructor = "[[${isInstructor}]]";
+
+	function showCourseAdminButton() {
+		if (isInstructor === "true") {
+			document.getElementById('courseAdminButton').style.display = "block";
+			document.getElementById('questionManagerButton').style.display = "block";
+		}
+	}
+</script>
+</head>
+<body onload="showCourseAdminButton()">
+
+
+	<div class="topnav">
+		<a href="/instructorhomepage">GroupMe</a> <a style="float: right"
+			href="/logout">Logout</a> <a style="float: right" class="active"
+			href="#account">Account</a>
+	</div>
+
+	<div class="container">
+		<h1 th:text="${message}"></h1>
+		<input type="button" onclick="history.back();" value="Back">
+
+	</div>
+
+	<div class="container">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>GroupNo</th>
+					<th>Candidates</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${groups.empty}">
+					<td>No Groups Available</td>
+				</tr>
+				<tr th:each="group : ${groups}">
+					<td th:text="${group.groupNo}" style="font-size: 30px"></td>
+					<td>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>First Name</th>
+									<th>Last Name</th>
+									<th>BannerID</th>
+									<th>Responses</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="candidate : ${group.candidates}">
+									<td th:text="${candidate.firstName}"></td>
+									<td th:text="${candidate.lastName}"></td>
+									<td th:text="${candidate.bannerId}"></td>
+									<td><table class="table table-striped">
+											<thead>
+												<tr>
+													<th>Title</th>
+													<th>Type</th>
+													<th>Answer</th>
+													<th>Criterion</th>
+													<th>Weightage</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="prettyResponse : ${candidate.prettyResponses}">
+													<td th:text="${prettyResponse.title}"></td>
+													<td th:text="${prettyResponse.type}"></td>
+													<td th:text="${prettyResponse.answer}"></td>
+													<td th:text="${prettyResponse.criterion}"></td>
+													<td th:text="${prettyResponse.weight}"></td>
+												</tr>
+											</tbody>
+										</table></td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+	</div>
+</body>
+</html>

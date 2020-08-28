@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Admin Page</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/theme.css}"/>
+
+    <script type="text/javascript">
+        function showPublishSurveyButton() {
+            var isTA = "[[${roleName}]]";
+            if (isTA === "ROLE_TA") {
+                document.getElementById('publishSurvey').style.display = "none";
+            } else {
+                document.getElementById('publishSurvey').style.display = "block";
+            }
+        }
+    </script>
+
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        tr {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="topnav">
+    <a href="#">GroupMe</a>
+    <a style="float: right" href="/logout">Logout</a>
+    <a style="float: right" class="active" href="#account">Account</a>
+</div>
+<table>
+    <tr>
+        <th>Course Code</th>
+        <th>Course Name</th>
+        <th>Course CRN</th>
+    </tr>
+    <tr th:each="course : ${courses}">
+        <td th:text="${course.courseCode}"></td>
+        <td th:text="${course.courseName}"></td>
+        <td th:text="${course.courseCrn}"></td>
+        <td th:if="${course.courseCode != null}" th:hidden="false">
+            <form method="get" th:action="@{/courseAdmin/course}" style="width: auto;">
+                <input type="hidden" name="courseCode" th:value="${course.courseCode}">
+                <input type="hidden" name="courseName" th:value="${course.courseName}">
+                <input type="hidden" name="courseCrn" th:value="${course.courseCrn}">
+                <input type="hidden" name="roleName" th:value="${roleName}">
+                <button type="submit">Go To Course</button>
+                <button type="submit" id="createSurvey" class="button"
+                        th:formaction="@{/survey/createSurvey}">Create Survey
+                </button>
+                <button type="submit" id="customizeSurvey" class="button"
+                        th:formaction="@{/customiseSurvey/getSurveyQuestion}">Customize Survey
+                </button>
+                <button type="submit" id="publishSurvey" class="button" th:formaction="@{/publishSurvey}"
+                        style="display: block;" onload="showPublishSurveyButton()">Publish Survey
+                </button>
+                <button type="submit" id="createGroups" class="button" th:formaction="@{/grouping/configureGroupingStrategy}"
+                        style="display: block;" > Group Formation
+                </button>
+            </form>
+        </td>
+    </tr>
+</table>
+<span th:text="${message}"></span>
+<span th:if="${status != null}">
+    <p th:text="'Status: ' + ${status}"></p>
+</span>
+</body>
+</html>

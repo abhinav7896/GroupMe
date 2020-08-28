@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Details</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/theme.css}"/>
+    <script type="text/javascript">
+
+        function showCsvImportDiv() {
+            document.getElementById('div_get_data').style.display = 'none';
+            if (document.getElementById('import_csv_form').style.display == 'none') {
+                document.getElementById('import_csv_form').style.display = 'block';
+            }
+        }
+
+        function showAddTADiv() {
+            document.getElementById('import_csv_form').style.display = 'none';
+            if (document.getElementById('div_get_data').style.display == 'none') {
+                document.getElementById('div_get_data').style.display = 'block';
+            }
+
+        }
+    </script>
+
+</head>
+<body>
+<div class="topnav">
+    <a href="#Groupme">GroupMe</a>
+    <a style="float: right" href="logout">Logout</a>
+    <a style="float: right" class="active" href="#account">Account</a>
+</div>
+<div id="buttons" style="text-align: center; display: block; ">
+    <table>
+        <tr>
+            <td>
+                <button name="importcsv" onclick="showCsvImportDiv()">Import CSV</button>
+            </td>
+            <td>
+                <button name="addta" onclick="showAddTADiv()">Add TA</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div>
+
+    <h1 th:text="${courseCode}"></h1>
+    <h1 th:text="${courseName}"></h1>
+    <h1 th:text="${courseCrn}"></h1>
+    <div id="import_csv_form" style="text-align: center; display: none;">
+        <form th:action="@{/courseAdmin/uploadfile}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="courseCode" th:value="${courseCode}">
+            <input type="hidden" name="courseName" th:value="${courseName}">
+            <input type="hidden" name="courseCrn" th:value="${courseCrn}">
+            <input type="file" id="file" name="file"/>
+            <br>
+            <input type="submit"/>
+        </form>
+    </div>
+
+
+    <div id="div_get_data" style="text-align: center; display: none;">
+        <h3>Select TA from Existing User for Course</h3>
+        <form name="form_get_data" class="form" th:action="@{/courseoperation(courseCode=${courseCode})}"
+              method="POST"
+              style="text-align: center;">
+            <table style="margin-left:auto; margin-right:auto;">
+                <tr>
+                    <th colspan="2" style="text-align: center">
+                        Assign TA to the Course
+                    </th>
+                </tr>
+                <tr>
+                    <td><label for="email">Email</label></td>
+                    <td>
+                        <input type="email" th:name="email" id="email" placeholder="Enter Email" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit">Submit</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <span th:if="${status != null}">
+    <p th:text="'Status: ' + ${status}"></p>
+    </span>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Instructor Courses</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Course Code</th>
+        <th>Course Name</th>
+        <th>Course CRN</th>
+    </tr>
+    <tr th:each="course : ${courses}">
+
+        <td th:text="${course.courseName}"></td>
+        <td th:text="${course.courseCode}"></td>
+        <td th:text="${course.courseCrn}"></td>
+
+    </tr>
+</table>
+</body>
+</html>

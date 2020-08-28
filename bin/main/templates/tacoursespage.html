@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TA Home Page</title>
+
+</head>
+<body>
+
+<div class="topnav">
+    <a class="active" href="#home-loggedin">GroupMe</a>
+    <form class="pull-right" id="home-loggedin" method="post" th:action="@{/logout}">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+
+<div style="text-align: center; margin: 0 auto;">
+    <h1>Details of Course</h1>
+
+    <form name="form" method="GET">
+
+        <table th:if="${courseTACourses != null}">
+            <thead>
+            <tr>
+                <th>Course Code</th>
+                <th>Course Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="details : ${courseTACourses}">
+                <td th:text="${details.courseName}"></td>
+                <td th:text="${details.courseCode}"></td>
+                <td>
+                    <a th:href="@{/operationoncourse(courseCode=${details.courseCode},courseName=${details.courseName})}">
+                        Go To Course
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <span th:if="${courseTACourses == null}">You are not TA in any Courses.</span>
+    </form>
+</div>
+</body>
+</html>

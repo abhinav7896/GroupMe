@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Home Page</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/theme.css}"/>
+    <script th:inline="javascript">
+        var isInstructor = "[[${isInstructor}]]";
+
+        function showCourseAdminButton() {
+            if (isInstructor === "true") {
+                document.getElementById('courseAdminButton').style.display = "block";
+            }
+        }
+    </script>
+</head>
+
+<body onload="showCourseAdminButton()">
+<div class="topnav">
+    <a href="/instructorhomepage">GroupMe</a> <a style="float: right" href="/logout">Logout</a>
+    <a style="float: right" class="active" href="#account">Account</a>
+</div>
+
+<ul class="vNavbar">
+    <li><a href="/instructor/createQuestion">Create Question</a></li>
+    <li><a href="/instructor/listAllTitles">View List of Titles</a></li>
+    <li><a href="/instructor/deleteQuestion">Delete Question</a></li>
+</ul>
+<br/>
+
+<div style="margin-left: 21%; padding: 1px">
+    <div class="container">
+    </div>
+    <h2 style="text-align: center">List of Sorted Question Titles by Date Created</h2>
+    <table class="padding-table-columns" style="margin-left: auto;margin-right: auto;">
+        <thead>
+        <tr>
+            <th>Titles</th>
+            <th>Date Created</th>
+        </tr>
+        </thead>
+        <tbody>
+        <span th:if="${sortedTitles!=null}">
+					<tr th:each="eachTitle : ${sortedTitles}">
+						<td th:text="${eachTitle.title}"></td>
+						<td th:text="${eachTitle.createdDate}"></td>
+					</tr>
+				</span>
+        <span th:if="${sortedTitles==null}">
+					<tr>
+						<td colspan=3>
+							No list available.
+						</td>
+					</tr>
+				</span>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html xmlns:th="http://www.thymeleaf.org" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html xmlns:th="http://www.thymeleaf.org" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html xmlns:th="http://www.thymeleaf.org" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html xmlns:th="http://www.thymeleaf.org" class="no-js">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link
+            href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css"
+            rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/theme.css}">
+</head>
+<body>
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a>
+    to improve your experience.</p>
+<![endif]-->
+
+<div class="topnav">
+    <a href="/" class="active">GroupMe</a>
+    <a style="float: right" href="logout">Logout</a>
+    <a style="float: right" class="active" href="#account">Account</a>
+</div>
+
+<div style="text-align: center; margin: 0 auto;">
+    <h2>Welcome! <span th:text="${userName}"></span></h2>
+    <h1>Details of Course</h1>
+    <table class="padding-table-columns" style="margin-left: auto;margin-right: auto;">
+        <thead>
+        <tr>
+            <th>Course Code</th>
+            <th>Course Name</th>
+            <th>Course CRN</th>
+        </tr>
+        </thead>
+        <tbody>
+        <span th:if="${details!=null}">
+                <tr th:each="details : ${details}">
+    
+                <td th:text="${details.courseName}"></td>
+                <td th:text="${details.courseCode}"></td>
+                <td th:text="${details.courseCrn}"></td>
+                </tr>
+            </span>
+        <span th:if="${details==null}">
+            <tr>
+                <td>
+                    No Information available for Courses.
+                </td>
+            </tr>
+            </span>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>

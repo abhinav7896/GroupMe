@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html xmlns:th="http://www.thymeleaf.org" class="no-js lt-ie9 lt-ie8 lt-ie7"
+      xmlns:th="https://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 7]>
+<html xmlns:th="http://www.thymeleaf.org" class="no-js lt-ie9 lt-ie8" xmlns:th="https://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 8]>
+<html xmlns:th="http://www.thymeleaf.org" class="no-js lt-ie9" xmlns:th="https://www.thymeleaf.org"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html xmlns:th="http://www.thymeleaf.org" class="no-js"> <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/home_styles.css}">
+</head>
+<body>
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a>
+    to improve your experience.</p>
+<![endif]-->
+<div class="topnav">
+    <a class="active" href="#home-loggedin">GroupMe</a>
+    <form class="pull-right" id="home-loggedin" method="post" th:action="@{/logout}">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+
+<p>Form and manage groups for your course projects and assignments with GroupMe! Get started...</p>
+<div>
+
+</div>
+
+<script src="" async defer></script>
+</body>
+</html>

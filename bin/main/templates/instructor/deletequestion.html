@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Home Page</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/theme.css}"/>
+    <script th:inline="javascript">
+        var isInstructor = "[[${isInstructor}]]";
+
+        function showCourseAdminButton() {
+            if (isInstructor === "true") {
+                document.getElementById('courseAdminButton').style.display = "block";
+            }
+        }
+    </script>
+</head>
+
+<body onload="showCourseAdminButton()">
+
+
+<div class="topnav">
+    <a href="/instructorhomepage">GroupMe</a> <a style="float: right" href="/logout">Logout</a>
+    <a style="float: right" class="active" href="#account">Account</a>
+</div>
+
+<div>
+    <ul class="vNavbar">
+        <li><a th:href="@{/instructor/createQuestion}">Create Question</a></li>
+        <li><a th:href="@{/instructor/listAllTitles}">View List of Titles</a></li>
+        <li><a th:href="@{/instructor/deleteQuestion}">Delete Question</a></li>
+    </ul>
+    <br/>
+    <span th:text="${message}"></span>
+</div>
+
+<div style="margin-left: 21%; padding: 1px">
+    <h2 style="text-align: center">Delete Question</h2>
+    <form style="margin-left: 21%; padding: 1px" th:action="@{/instructor/deleteQuestion}" method="post"
+          th:object="${question}">
+        <select th:field="*{questionId}">
+            <option value=""> -- Choose an option --</option>
+            <option th:each="questionText : ${details}" th:value="${questionText.questionId}"
+                    th:text="${questionText.question}">
+            </option>
+        </select>
+        <button onClick="return confirm('Are you sure you want to delete the question?')" type="submit"
+                value="Delete">Delete
+        </button>
+    </form>
+</div>
+</body>
+
+</html>

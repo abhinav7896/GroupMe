@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Publish Survey</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/theme.css}"/>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        tr {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+
+<body>
+<div class="topnav">
+    <a href="/instructorhomepage">GroupMe</a>
+    <a style="float: right" href="/logout">Logout</a>
+    <a style="float: right" class="active" href="#account">Account</a>
+</div>
+<div>
+    <form name="surveyQuestionForm" th:action="@{/exitPublishSurveyPage}" method="post" th:object="${surveyQuestions}">
+        <input type="hidden" name="roleName" th:value="${roleName}">
+        <h4 th:text="${publisherMessage}"></h4>
+        <br>
+        <br>
+        <button type="submit" class="button">Go Back</button>
+        <table id="surveyQuestionTableData">
+            <thead>
+            <tr>
+                <td>Question ID</td>
+                <td>Question Title</td>
+                <td>Question</td>
+                <td>Question Type</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="question, state : *{surveyQuestionList}">
+                <td th:text="*{surveyQuestionList[__${state.index}__].questionId}">
+                </td>
+                <td th:text="*{surveyQuestionList[__${state.index}__].questionTitle}">
+                </td>
+                <td th:text="*{surveyQuestionList[__${state.index}__].question}">
+                </td>
+                <td th:text="*{surveyQuestionList[__${state.index}__].questionType}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</body>
+</html>

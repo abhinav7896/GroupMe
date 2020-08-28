@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Question</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/theme.css}"/>
+
+    <script type="text/javascript">
+
+        function changeButtonText() {
+            let option = document.getElementById("type").value;
+            if (option === "Numeric" || option === "Free text") {
+                document.getElementById("submit").innerText = "Save";
+            } else {
+                document.getElementById("submit").innerText = "Next";
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="topnav">
+    <a href="/instructorhomepage">GroupMe</a>
+    <a style="float: right" href="/logout">Logout</a>
+    <a style="float: right" class="active" href="#account">Account</a>
+</div>
+
+<div>
+    <ul class="vNavbar">
+        <li><a th:href="@{/instructor/createQuestion}">Create Question</a></li>
+        <li><a th:href="@{/instructor/listAllTitles}">View List of Titles</a></li>
+        <li><a th:href="@{/instructor/deleteQuestion}">Delete Question</a></li>
+    </ul>
+    <br/>
+    <span th:text="${message}"></span>
+</div>
+
+<div style="text-align: center;">
+    <h3> Create Question Here</h3>
+    <br><br>
+    <form style="display: inline-block" name="form" method="post" th:action="@{/instructor/createQuestion}">
+        <table>
+            <tbody>
+            <tr>
+                <td><label for="title">Enter Question Title</label></td>
+                <td><input type="text" name="title" id="title" style="margin-left: 10px;" required></td>
+            </tr>
+            <tr>
+                <td><label for="question" style="margin-top: 10px;">Enter Question</label></td>
+                <td><input type="text" name="question" id="question" style="margin-top: 10px; margin-left: 10px;"
+                           required></td>
+            </tr>
+            <tr>
+                <td><label for="type" style="margin-top: 10px;">Select Question Type</label></td>
+                <td><select name="type" id="type" onchange="changeButtonText()"
+                            style="margin-top: 10px; margin-left: 20px;" required>
+                    <option value="Numeric" selected> Numeric</option>
+                    <option value="Multiple choice - choose one">Multiple choice - choose one</option>
+                    <option value="Multiple choice - choose multiple">Multiple choice - choose multiple</option>
+                    <option value="Free text">Free text</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit" name="submit" id="submit" style="margin-top: 10px;">Save
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</body>
+</html>

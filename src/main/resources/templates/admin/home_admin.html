@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" xmlns:th="https://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8" xmlns:th="https://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9" xmlns:th="https://www.thymeleaf.org"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" xmlns:th="https://www.thymeleaf.org">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link
+            href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css"
+            rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/theme.css}">
+</head>
+<body>
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a>
+    to improve your experience.</p>
+<![endif]-->
+<div class="topnav" style="float: top">
+    <a class="active" href="/admin">GroupMe</a> <a style="float: right"
+                                                   href="/logout">Logout</a>
+</div>
+
+<ul class="vNavbar">
+    <li><a class="active" href="#admin">Dashboard</a></li>
+    <li><a href="admin/manageCourses">Manage Courses</a></li>
+    <li><a href="admin/manageInstructors">Manage Instructors</a></li>
+</ul>
+<br/>
+<div style="margin:auto; padding:1px">
+    <h2 style="text-align: center">ADMIN DASHBOARD</h2>
+</div>
+
+<p>Welcome Admin</p>
+
+<script src="" async defer></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <title>Forget Password</title>
+</head>
+<body>
+<ul>
+    <li class="logo"><a href="/"> GroupMe</a></li>
+    <li style="float: right"><a href="signup">Sign Up</a></li>
+    <li style="float: right"><a href="logIn">Login</a></li>
+</ul>
+<h2 style="text-align: center">Forgot Password?</h2>
+<h3 style="text-align: center">Enter the registered email id to receive a mail for password reset</h3>
+<div style="margin-left: 27%; padding: 1px;">
+    <form name="forgetPasswordForm"
+          th:action="@{/forgotPassword}" method="post">
+
+        <table style="margin-left:auto;margin-right:auto;">
+            <tr>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <td align="right">Email</td>
+                <td><input type="email" name="email"/></td>
+            </tr>
+            <tr>
+                <td align="right"></td>
+                <td><input type="submit" value="Submit"/></td>
+            </tr>
+        </table>
+        <p style="text-align: center">Email doesn't exist!</p>
+    </form>
+</div>
+</body>
+</html>

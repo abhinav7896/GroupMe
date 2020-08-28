@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Student Home Page</title>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+	crossorigin="anonymous">
+<link
+	href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css"
+	rel="stylesheet" crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/theme.css}" />
+<script th:inline="javascript">
+	var isInstructor = "[[${isInstructor}]]";
+
+	function showCourseAdminButton() {
+		if (isInstructor === "true") {
+			document.getElementById('courseAdminButton').style.display = "block";
+			document.getElementById('questionManagerButton').style.display = "block";
+		}
+	}
+</script>
+</head>
+<body onload="showCourseAdminButton()">
+
+	<div class="topnav">
+		<a href="/instructorhomepage">GroupMe</a> <a style="float: right"
+			href="/logout">Logout</a> <a style="float: right" class="active"
+			href="#account">Account</a>
+	</div>
+
+
+	<h1 th:text="${message}"></h1>
+
+	<div class="container">
+		<form method="GET" th:action="@{/grouping/getGroups}">
+			<select class="form-control" name="algorithm" id="algorithm" required>
+				<option value="" disabled selected>--Select an algorithm--</option>
+				<option th:each="groupingStrategy : ${groupingStrategies}"
+					th:text="${groupingStrategy}"></option>
+			</select> <label for="groupSize">Group Size</label> <input type="text"
+				name="groupSize" id="groupSize" required><br> <input
+				type="hidden" name="surveyId" th:value="${surveyId}"> <input
+				type="hidden" name="courseCode" th:value="${courseCode}">
+			<button type="submit" id="getGroups" class="button">Get
+				Groups</button>
+			<input type="button" onclick="history.back();" value="Back">
+		</form>
+	</div>
+
+</body>
+</html>
