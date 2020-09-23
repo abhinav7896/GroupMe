@@ -1,5 +1,5 @@
 
-GroupMe is a web application designed for instructors and teaching assistants to take survey and group students based on their responses to a survey. The application is inspired by CATME, a team-maker tool. Instructors can group students for group work, in one click!
+GroupMe! is a web application designed for instructors and teaching assistants to take survey and group students based on their responses to a survey. The application is inspired by CATME, a team-maker tool. Instructors can group students for group work, in one click!
 
 Features:
 * Instructors can enroll students and teaching assistants for the course.
